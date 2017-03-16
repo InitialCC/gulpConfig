@@ -432,7 +432,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Initial_C",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/InitialCC/gulpConfig.git"
+  },
+  "bugs": {
+    "url": "https://github.com/InitialCC/gulpConfig/issues"
+  },
+  "homepage": "https://github.com/InitialCC/gulpConfig#readme",
   "description": ""
 }
