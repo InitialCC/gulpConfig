@@ -15,7 +15,7 @@ var gulp = require('gulp'),
  * 监控指定项目 	baseDir: './app'
  * 监控项目下的其他文件 files；
  */
-
+var path = './app';
 gulp.task('server', function() {
 	var files = [
 		'./**/*.html',
@@ -23,7 +23,7 @@ gulp.task('server', function() {
 	];
 	browserSync.init(files, {
 		server: {
-			baseDir: './app/'
+			baseDir: path
 		}
 	});
 })
@@ -37,10 +37,10 @@ gulp.task('server', function() {
  */
 
 gulp.task('sass', function() {
-	return gulp.src('./app/sass/*.scss')
+	return gulp.src(path+'/sass/*.scss')
 		.pipe(plumber())
 		.pipe(sass.sync().on('error', sass.logError))
-		.pipe(gulp.dest('./app/css'));
+		.pipe(gulp.dest(path+'/css'));
 });
 
 /*
@@ -48,7 +48,7 @@ gulp.task('sass', function() {
  * 目录结构:gulp.watch('./app/sass/*.scss', ['sass']);
  */
 gulp.task('watch', function() {
-	gulp.watch('./app/sass/*.scss', ['sass']);
+	gulp.watch(path+'/sass/*.scss', ['sass']);
 });
 /*
  * css最小化插件
@@ -58,7 +58,7 @@ gulp.task('watch', function() {
  */
 
 gulp.task('testCssmin', function() {
-	gulp.src('./app/css/*.css')
+	gulp.src(path+'/css/*.css')
 		.pipe(cssmin())
 		.pipe(gulp.dest('./dist/css'));
 });
@@ -79,7 +79,7 @@ gulp.task('htmlBuild', function() {
 			prefix: '@@',
 			basepath: '@file'
 		}))
-		.pipe(gulp.dest('./app/'))
+		.pipe(gulp.dest(path))
 		.pipe(gulp.dest('./dist/'));
 });
 
@@ -90,7 +90,7 @@ gulp.task('htmlBuild', function() {
  */
 
 gulp.task('jsmin', function() {
-	gulp.src('./app/js/*.js')
+	gulp.src(path+'/js/*.js')
 		.pipe(jsmin())
 		.pipe(gulp.dest('./dist/js'))
 		.pipe(rename({
