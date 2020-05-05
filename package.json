@@ -436,7 +436,9 @@
     "yeast": "^0.1.2"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "yarn run gulp",
+    "build": "yarn run gulp build"
   },
   "author": "Initial_C",
   "license": "ISC",
