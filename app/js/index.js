@@ -1,3 +1,3 @@
-function() {
-	show();
+function show() {
+
 }

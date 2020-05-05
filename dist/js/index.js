@@ -1,2 +1,2 @@
 
-function(){show();}
+function show(){}

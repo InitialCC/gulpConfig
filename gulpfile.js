@@ -2,13 +2,18 @@
 /*
 插件导入
 */
-var gulp = require('gulp'),
+
+
+const gulp = require('gulp'),
 	sass = require('gulp-sass'),
 	jsmin = require('gulp-jsmin'),
 	cssmin = require('gulp-minify-css'),
+	rename = require('gulp-rename'),
 	browserSync = require('browser-sync').create(),
 	plumber = require('gulp-plumber'),
-	fileinclude = require('gulp-file-include');
+	fileinclude = require('gulp-file-include'),
+	pump = require('pump'),
+	concat = require('gulp-concat'); // 合并css
 
 /*
  *browserSync插件 浏览器无刷新监控
@@ -16,7 +21,8 @@ var gulp = require('gulp'),
  * 监控项目下的其他文件 files；
  */
 var path = './app';
-gulp.task('server', function() {
+gulp.task('server', function (done) {
+
 	var files = [
 		'./**/*.html',
 		'./**/**/*.css'
@@ -26,6 +32,7 @@ gulp.task('server', function() {
 			baseDir: path
 		}
 	});
+	done();
 })
 
 /*
@@ -36,19 +43,25 @@ gulp.task('server', function() {
  * 监控报错文件：.pipe(plumber()) 
  */
 
-gulp.task('sass', function() {
-	return gulp.src(path+'/sass/*.scss')
-		.pipe(plumber())
-		.pipe(sass.sync().on('error', sass.logError))
-		.pipe(gulp.dest(path+'/css'));
+gulp.task('sass', function (cb) {
+	pump([gulp.src(path + '/sass/*.scss'),
+	plumber(),
+	sass.sync().on('error', sass.logError),
+	gulp.dest(path + '/css')],
+		cb())
 });
+// return gulp.src(path + '/sass/*.scss')
+// 		.pipe(plumber())
+// 		.pipe(sass.sync().on('error', sass.logError))
+// 		.pipe(gulp.dest(path + '/css'));
 
 /*
  * 监控scss插件
  * 目录结构:gulp.watch('./app/sass/*.scss', ['sass']);
  */
-gulp.task('watch', function() {
-	gulp.watch(path+'/sass/*.scss', ['sass']);
+gulp.task('watch', function (done) {
+	gulp.watch(path + '/sass/*.scss', gulp.series('sass'));
+	done()
 });
 /*
  * css最小化插件
@@ -57,10 +70,11 @@ gulp.task('watch', function() {
  * 生成目标文件: .pipe(gulp.dest('./appcssmin/'));
  */
 
-gulp.task('testCssmin', function() {
-	gulp.src(path+'/css/*.css')
-		.pipe(cssmin())
-		.pipe(gulp.dest('./dist/css'));
+gulp.task('testCssmin', function (cb) {
+	pump([gulp.src(path + '/css/*.css'),
+	cssmin(),
+	gulp.dest('./dist/css')
+	], cb())
 });
 
 /*
@@ -72,16 +86,20 @@ gulp.task('testCssmin', function() {
  *	模板导入举例: @@include('include/header.html')
  */
 
-gulp.task('htmlBuild', function() {
-	// 适配page中所有文件夹下的所有html，排除page下的include文件夹中html
-	gulp.src(['app/page/**/*.html', '!app/page/include/**.html'])
-		.pipe(fileinclude({
-			prefix: '@@',
-			basepath: '@file'
-		}))
-		.pipe(gulp.dest(path))
-		.pipe(gulp.dest('./dist/'));
-});
+// 适配page中所有文件夹下的所有html，排除page下的include文件夹中html
+gulp.task('htmlBuild', function (cb) {
+	pump([gulp.src(['app/page/**/*.html', '!app/page/include/**.html']),
+	fileinclude({
+		prefix: '@@',
+		basepath: '@file'
+	}),
+	gulp.dest(path),
+	gulp.dest('./dist/')
+	], cb())
+})
+
+
+
 
 /*
  *js生成插件
@@ -89,22 +107,26 @@ gulp.task('htmlBuild', function() {
  *生成到目录结构 ./dist
  */
 
-gulp.task('jsmin', function() {
-	gulp.src(path+'/js/*.js')
-		.pipe(jsmin())
-		.pipe(gulp.dest('./dist/js'))
-		.pipe(rename({
-			suffix: '.min'
-		}))
+gulp.task('jsmin', function (cb) {
+	pump([gulp.src(path + '/js/*.js'),
+	jsmin(),
+	gulp.dest('./dist/js'),
+	rename({
+		suffix: '.min'
+	})
+
+	], cb)
 });
 
 /*
 默认调用插件方法
  */
 
-gulp.task('build', function() {
-	gulp.run('testCssmin', 'htmlBuild', 'jsmin');
+gulp.task('build', gulp.series('testCssmin', 'htmlBuild', 'jsmin'), function () {
+
 });
-gulp.task('default', function() {
-	gulp.run('server', 'sass', 'watch');
+
+
+gulp.task('default', gulp.series('server', 'sass', 'watch'), function () {
+	console.info(111);
 })
