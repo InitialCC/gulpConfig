@@ -432,7 +432,7 @@
     "y18n": "^3.2.1",
     "yallist": "^2.1.2",
     "yargs": "^4.8.1",
-    "yargs-parser": "^2.4.1",
+    "yargs-parser": "^13.1.2",
     "yeast": "^0.1.2"
   },
   "scripts": {
