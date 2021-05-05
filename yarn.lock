@@ -5145,8 +5145,8 @@ xmlhttprequest-ssl@1.5.3:
   resolved "https://registry.npm.taobao.org/xmlhttprequest-ssl/download/xmlhttprequest-ssl-1.5.3.tgz#185a888c04eca46c3e4070d99f7b49de3528992d"
 
 xmlhttprequest-ssl@^1.5.3:
-  version "1.6.0"
-  resolved "https://registry.npm.taobao.org/xmlhttprequest-ssl/download/xmlhttprequest-ssl-1.6.0.tgz#dc201efdadb824b5f188478962fc270115880fe9"
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/xmlhttprequest-ssl/-/xmlhttprequest-ssl-1.6.2.tgz#dd6899bfbcf684b554e393c30b13b9f3b001a7ee"
 
 xmlhttprequest-ssl@~1.5.4:
   version "1.5.5"
