@@ -397,7 +397,7 @@
     "time-stamp": "^1.0.1",
     "to-array": "^0.1.4",
     "tough-cookie": "^2.3.2",
-    "trim-newlines": "^1.0.0",
+    "trim-newlines": "^3.0.1",
     "tunnel-agent": "^0.6.0",
     "tweetnacl": "^0.14.5",
     "ua-parser-js": "^0.7.12",
