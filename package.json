@@ -390,7 +390,7 @@
     "strip-bom": "^2.0.0",
     "strip-indent": "^1.0.1",
     "supports-color": "^2.0.0",
-    "tar": "^2.2.1",
+    "tar": "^4.4.15",
     "tfunk": "^3.1.0",
     "through2": "^2.0.3",
     "tildify": "^1.2.0",
