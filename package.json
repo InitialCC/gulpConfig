@@ -284,7 +284,7 @@
     "natives": "^1.1.0",
     "negotiator": "^0.6.1",
     "node-gyp": "^3.6.0",
-    "node-sass": "^4.5.0",
+    "node-sass": "^7.0.0",
     "node-uuid": "^1.4.7",
     "nopt": "^3.0.6",
     "normalize-package-data": "^2.3.6",
