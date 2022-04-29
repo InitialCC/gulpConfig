@@ -30,7 +30,7 @@
     "arrify": "^1.0.1",
     "asn1": "^0.2.3",
     "assert-plus": "^1.0.0",
-    "async": "^1.5.2",
+    "async": "^2.6.4",
     "async-each": "^1.0.1",
     "async-each-series": "^0.1.1",
     "async-foreach": "^0.1.3",
